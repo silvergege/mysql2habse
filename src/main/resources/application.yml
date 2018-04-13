@@ -1,0 +1,11 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://rm-bp19w7u8xws6hcs3i.mysql.rds.aliyuncs.com/vis
+    username: sirun
+    password: sirun@2018
+mybatis:
+  #实体类所做包
+  type-aliases-package: com.example.mysql2hbase.po
+  #mapper.xml所在位置
+  mapper-locations: com.example.mysql2hbase.mapper/*.xml

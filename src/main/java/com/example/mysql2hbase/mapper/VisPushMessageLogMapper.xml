@@ -1,0 +1,350 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.mysql2hbase.mapper.VisPushMessageLogMapper" >
+  <resultMap id="BaseResultMap" type="com.example.mysql2hbase.po.VisPushMessageLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="vehicle_identifier" property="vehicleIdentifier" jdbcType="VARCHAR" />
+    <result column="vehicle_identifier_type" property="vehicleIdentifierType" jdbcType="INTEGER" />
+    <result column="message_version" property="messageVersion" jdbcType="VARCHAR" />
+    <result column="if_from" property="ifFrom" jdbcType="VARCHAR" />
+    <result column="msg_create_time" property="msgCreateTime" jdbcType="TIMESTAMP" />
+    <result column="message_type" property="messageType" jdbcType="INTEGER" />
+    <result column="message_id" property="messageId" jdbcType="VARCHAR" />
+    <result column="event_creation_time" property="eventCreationTime" jdbcType="TIMESTAMP" />
+    <result column="uplink_count" property="uplinkCount" jdbcType="INTEGER" />
+    <result column="downlink_count" property="downlinkCount" jdbcType="INTEGER" />
+    <result column="body" property="body" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, vehicle_identifier, vehicle_identifier_type, message_version, if_from, msg_create_time, 
+    message_type, message_id, event_creation_time, uplink_count, downlink_count, body
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.example.mysql2hbase.po.VisPushMessageLogExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from vis_push_message_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from vis_push_message_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from vis_push_message_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.example.mysql2hbase.po.VisPushMessageLogExample" >
+    delete from vis_push_message_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.example.mysql2hbase.po.VisPushMessageLog" >
+    insert into vis_push_message_log (id, vehicle_identifier, vehicle_identifier_type, 
+      message_version, if_from, msg_create_time, 
+      message_type, message_id, event_creation_time, 
+      uplink_count, downlink_count, body
+      )
+    values (#{id,jdbcType=BIGINT}, #{vehicleIdentifier,jdbcType=VARCHAR}, #{vehicleIdentifierType,jdbcType=INTEGER}, 
+      #{messageVersion,jdbcType=VARCHAR}, #{ifFrom,jdbcType=VARCHAR}, #{msgCreateTime,jdbcType=TIMESTAMP}, 
+      #{messageType,jdbcType=INTEGER}, #{messageId,jdbcType=VARCHAR}, #{eventCreationTime,jdbcType=TIMESTAMP}, 
+      #{uplinkCount,jdbcType=INTEGER}, #{downlinkCount,jdbcType=INTEGER}, #{body,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.mysql2hbase.po.VisPushMessageLog" >
+    insert into vis_push_message_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="vehicleIdentifier != null" >
+        vehicle_identifier,
+      </if>
+      <if test="vehicleIdentifierType != null" >
+        vehicle_identifier_type,
+      </if>
+      <if test="messageVersion != null" >
+        message_version,
+      </if>
+      <if test="ifFrom != null" >
+        if_from,
+      </if>
+      <if test="msgCreateTime != null" >
+        msg_create_time,
+      </if>
+      <if test="messageType != null" >
+        message_type,
+      </if>
+      <if test="messageId != null" >
+        message_id,
+      </if>
+      <if test="eventCreationTime != null" >
+        event_creation_time,
+      </if>
+      <if test="uplinkCount != null" >
+        uplink_count,
+      </if>
+      <if test="downlinkCount != null" >
+        downlink_count,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="vehicleIdentifier != null" >
+        #{vehicleIdentifier,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleIdentifierType != null" >
+        #{vehicleIdentifierType,jdbcType=INTEGER},
+      </if>
+      <if test="messageVersion != null" >
+        #{messageVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="ifFrom != null" >
+        #{ifFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="msgCreateTime != null" >
+        #{msgCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageType != null" >
+        #{messageType,jdbcType=INTEGER},
+      </if>
+      <if test="messageId != null" >
+        #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="eventCreationTime != null" >
+        #{eventCreationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uplinkCount != null" >
+        #{uplinkCount,jdbcType=INTEGER},
+      </if>
+      <if test="downlinkCount != null" >
+        #{downlinkCount,jdbcType=INTEGER},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.example.mysql2hbase.po.VisPushMessageLogExample" resultType="java.lang.Integer" >
+    select count(*) from vis_push_message_log
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update vis_push_message_log
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.vehicleIdentifier != null" >
+        vehicle_identifier = #{record.vehicleIdentifier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.vehicleIdentifierType != null" >
+        vehicle_identifier_type = #{record.vehicleIdentifierType,jdbcType=INTEGER},
+      </if>
+      <if test="record.messageVersion != null" >
+        message_version = #{record.messageVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ifFrom != null" >
+        if_from = #{record.ifFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.msgCreateTime != null" >
+        msg_create_time = #{record.msgCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.messageType != null" >
+        message_type = #{record.messageType,jdbcType=INTEGER},
+      </if>
+      <if test="record.messageId != null" >
+        message_id = #{record.messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.eventCreationTime != null" >
+        event_creation_time = #{record.eventCreationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.uplinkCount != null" >
+        uplink_count = #{record.uplinkCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.downlinkCount != null" >
+        downlink_count = #{record.downlinkCount,jdbcType=INTEGER},
+      </if>
+      <if test="record.body != null" >
+        body = #{record.body,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update vis_push_message_log
+    set id = #{record.id,jdbcType=BIGINT},
+      vehicle_identifier = #{record.vehicleIdentifier,jdbcType=VARCHAR},
+      vehicle_identifier_type = #{record.vehicleIdentifierType,jdbcType=INTEGER},
+      message_version = #{record.messageVersion,jdbcType=VARCHAR},
+      if_from = #{record.ifFrom,jdbcType=VARCHAR},
+      msg_create_time = #{record.msgCreateTime,jdbcType=TIMESTAMP},
+      message_type = #{record.messageType,jdbcType=INTEGER},
+      message_id = #{record.messageId,jdbcType=VARCHAR},
+      event_creation_time = #{record.eventCreationTime,jdbcType=TIMESTAMP},
+      uplink_count = #{record.uplinkCount,jdbcType=INTEGER},
+      downlink_count = #{record.downlinkCount,jdbcType=INTEGER},
+      body = #{record.body,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.mysql2hbase.po.VisPushMessageLog" >
+    update vis_push_message_log
+    <set >
+      <if test="vehicleIdentifier != null" >
+        vehicle_identifier = #{vehicleIdentifier,jdbcType=VARCHAR},
+      </if>
+      <if test="vehicleIdentifierType != null" >
+        vehicle_identifier_type = #{vehicleIdentifierType,jdbcType=INTEGER},
+      </if>
+      <if test="messageVersion != null" >
+        message_version = #{messageVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="ifFrom != null" >
+        if_from = #{ifFrom,jdbcType=VARCHAR},
+      </if>
+      <if test="msgCreateTime != null" >
+        msg_create_time = #{msgCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="messageType != null" >
+        message_type = #{messageType,jdbcType=INTEGER},
+      </if>
+      <if test="messageId != null" >
+        message_id = #{messageId,jdbcType=VARCHAR},
+      </if>
+      <if test="eventCreationTime != null" >
+        event_creation_time = #{eventCreationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="uplinkCount != null" >
+        uplink_count = #{uplinkCount,jdbcType=INTEGER},
+      </if>
+      <if test="downlinkCount != null" >
+        downlink_count = #{downlinkCount,jdbcType=INTEGER},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.mysql2hbase.po.VisPushMessageLog" >
+    update vis_push_message_log
+    set vehicle_identifier = #{vehicleIdentifier,jdbcType=VARCHAR},
+      vehicle_identifier_type = #{vehicleIdentifierType,jdbcType=INTEGER},
+      message_version = #{messageVersion,jdbcType=VARCHAR},
+      if_from = #{ifFrom,jdbcType=VARCHAR},
+      msg_create_time = #{msgCreateTime,jdbcType=TIMESTAMP},
+      message_type = #{messageType,jdbcType=INTEGER},
+      message_id = #{messageId,jdbcType=VARCHAR},
+      event_creation_time = #{eventCreationTime,jdbcType=TIMESTAMP},
+      uplink_count = #{uplinkCount,jdbcType=INTEGER},
+      downlink_count = #{downlinkCount,jdbcType=INTEGER},
+      body = #{body,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectLogsByVin" resultMap="BaseResultMap">
+ 	SELECT 
+		<include refid="Base_Column_List" /> 
+		from vis_push_message_log_${nodeId}
+		where vehicle_identifier = #{vin}
+		ORDER BY msg_create_time desc
+  </select>
+  
+  <select id="selectLogsByTime" parameterType="com.example.mysql2hbase.bean.QueryModel" resultMap="BaseResultMap">
+ 	SELECT 
+		<include refid="Base_Column_List" /> 
+		from vis_push_message_log_${year}
+		where 
+		msg_create_time &gt;= #{startTime} 
+		and msg_create_time &lt; #{endTime}
+		limit #{pageNum},#{pageSize}
+  </select>
+  
+  <select id="countLogsByTime" parameterType="com.example.mysql2hbase.bean.QueryModel" resultType="java.lang.Integer">
+ 	SELECT 
+		count(1)
+		from vis_push_message_log_${year}
+		where 
+		msg_create_time &gt;= #{startTime} 
+		and msg_create_time &lt; #{endTime}
+  </select>
+</mapper>
