@@ -30,6 +30,7 @@ public class F1MessageController {
 	@RequestMapping(value = "get10ByVin/vin", method = RequestMethod.GET)
 	public ResponseEntity<JsonResult> get10ByVin (@PathVariable(value = "vin") String vin){
 		logger.info("查询的vin：" + vin);
+		////////////
 		JsonResult r = new JsonResult();
 		try {
 			List<VisPushMessageLog> logs = service.getVisPushMessageLog10ByVin(vin);
